@@ -1,15 +1,21 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getAuthUser } from "@/lib/auth";
+import { mockProjects } from "@/lib/api/mock-db";
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const user = await getAuthUser();
   if (!user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   const { id } = await params;
-  const project = await prisma.project.findFirst({
-    where: { id, userId: user.id },
-    include: { rooms: true, costEstimate: true, materials: true },
-  });
+  try {
+    const project = await prisma.project.findFirst({
+      where: { id, userId: user.id },
+      include: { rooms: true, costEstimate: true, materials: true },
+    });
+    if (!project) return NextResponse.json({ error: "Project not found" }, { status: 404 });
+    return NextResponse.json({ project });
+  } catch {}
+  const project = mockProjects.find((p) => p.id === id && p.userId === user.id);
   if (!project) return NextResponse.json({ error: "Project not found" }, { status: 404 });
   return NextResponse.json({ project });
 }

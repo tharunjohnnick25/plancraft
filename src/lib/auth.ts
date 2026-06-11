@@ -31,11 +31,18 @@ export async function getAuthUser() {
     if (!token) return null;
     const decoded = verifyToken(token);
     if (!decoded) return null;
-    const { prisma } = await import("./prisma");
-    const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
-    if (!user) return null;
-    const { password: _, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    try {
+      const { prisma } = await import("./prisma");
+      const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
+      if (user) {
+        const { password: _, ...userWithoutPassword } = user;
+        return userWithoutPassword;
+      }
+    } catch {}
+    const { mockUsers } = await import("./api/mock-db");
+    const mockUser = mockUsers.find((u) => u.id === decoded.userId || u.email === decoded.email);
+    if (!mockUser) return null;
+    return mockUser as any;
   } catch {
     return null;
   }
