@@ -98,11 +98,12 @@ export const mockUsers: User[] = [
   { id: "u3", name: "Admin User", email: "admin@plancraftai.com", role: "admin", plan: "enterprise", createdAt: "2024-11-01", verified: true, company: "PlanCraftAI", country: "US", aiCreditsUsed: 0, aiCreditsTotal: 0, storageUsedMb: 0, storageQuotaMb: 0, projectsCount: 0 },
   { id: "u4", name: "Mike Builder", email: "mike@example.com", role: "builder", plan: "pro", createdAt: "2025-03-10", verified: true, company: "BuildRight Inc.", country: "UAE", aiCreditsUsed: 89, aiCreditsTotal: 100, storageUsedMb: 5120, storageQuotaMb: 10240, projectsCount: 11 },
   { id: "u5", name: "Priya Sharma", email: "priya@example.com", role: "designer", plan: "pro", createdAt: "2025-04-01", verified: true, company: "InStyle Interiors", country: "India", aiCreditsUsed: 73, aiCreditsTotal: 100, storageUsedMb: 7680, storageQuotaMb: 10240, projectsCount: 8 },
+  { id: "u6", name: "Demo User", email: "demo@plancraft.ai", role: "user", plan: "pro", createdAt: "2025-01-01", verified: true, company: "Demo Corp", country: "US", aiCreditsUsed: 5, aiCreditsTotal: 100, storageUsedMb: 120, storageQuotaMb: 10240, projectsCount: 2 },
 ];
 
 export const mockProjects: Project[] = [
   { 
-    id: "p1", name: "Modern Luxury Villa", description: "A 5-bedroom modern villa with open plan living, rooftop terrace, and smart home features", userId: "u1", plotLength: 60, plotWidth: 40, facing: "East", floors: 2, budgetTier: "Premium", style: "Modern", vastu: true, status: "completed", createdAt: "2025-03-01", updatedAt: "2025-03-05", shared: true, shareUrl: "https://plancraftai.com/share/p1", viewCount: 1243, vastuScore: 92, sustainabilityScore: 78, stars: 4,
+    id: "p1", name: "Modern Luxury Villa", description: "A 5-bedroom modern villa with open plan living, rooftop terrace, and smart home features", userId: "u6", plotLength: 60, plotWidth: 40, facing: "East", floors: 2, budgetTier: "Premium", style: "Modern", vastu: true, status: "completed", createdAt: "2025-03-01", updatedAt: "2025-03-05", shared: true, shareUrl: "https://plancraftai.com/share/p1", viewCount: 1243, vastuScore: 92, sustainabilityScore: 78, stars: 4,
     rooms: [
       { id: "r1", name: "Living Room", width: 20, length: 25, level: 0, type: "living", area: 500 }, 
       { id: "r2", name: "Master Bedroom", width: 16, length: 18, level: 0, type: "bedroom", area: 288 }, 
@@ -121,7 +122,7 @@ export const mockProjects: Project[] = [
     costEstimate: { foundation: 45000, concrete: 32000, steel: 28000, brick: 18000, flooring: 35000, plumbing: 15000, electrical: 12000, labor: 40000, contingency: 10000, designFees: 8000, total: 243000 } 
   },
   { 
-    id: "p2", name: "Compact Urban Duplex", description: "A compact 3-bedroom duplex optimized for urban living with shared amenities", userId: "u1", plotLength: 30, plotWidth: 40, facing: "North", floors: 2, budgetTier: "Standard", style: "Contemporary", vastu: true, status: "completed", createdAt: "2025-03-10", updatedAt: "2025-03-12", vastuScore: 85, sustainabilityScore: 82, viewCount: 567,
+    id: "p2", name: "Compact Urban Duplex", description: "A compact 3-bedroom duplex optimized for urban living with shared amenities", userId: "u6", plotLength: 30, plotWidth: 40, facing: "North", floors: 2, budgetTier: "Standard", style: "Contemporary", vastu: true, status: "completed", createdAt: "2025-03-10", updatedAt: "2025-03-12", vastuScore: 85, sustainabilityScore: 82, viewCount: 567,
     rooms: [
       { id: "r9", name: "Living Room", width: 15, length: 20, level: 0, area: 300 }, 
       { id: "r10", name: "Master Bedroom", width: 12, length: 14, level: 0, area: 168 }, 
@@ -136,7 +137,7 @@ export const mockProjects: Project[] = [
     costEstimate: { foundation: 28000, concrete: 20000, steel: 18000, brick: 12000, flooring: 22000, plumbing: 10000, electrical: 8000, labor: 25000, contingency: 5000, designFees: 3000, total: 151000 } 
   },
   { 
-    id: "p3", name: "Scandinavian Apartment", description: "A cozy 2-bedroom apartment with Nordic minimalist design philosophy", userId: "u1", plotLength: 0, plotWidth: 0, facing: "South", floors: 1, budgetTier: "Standard", style: "Scandinavian", vastu: false, status: "draft", createdAt: "2025-03-15", updatedAt: "2025-03-15",
+    id: "p3", name: "Scandinavian Apartment", description: "A cozy 2-bedroom apartment with Nordic minimalist design philosophy", userId: "u6", plotLength: 0, plotWidth: 0, facing: "South", floors: 1, budgetTier: "Standard", style: "Scandinavian", vastu: false, status: "draft", createdAt: "2025-03-15", updatedAt: "2025-03-15",
     rooms: [], materials: [], costEstimate: undefined 
   },
   { 
