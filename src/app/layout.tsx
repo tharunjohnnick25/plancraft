@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ToastContainer } from "@/components/ui";
@@ -77,24 +78,13 @@ export default function RootLayout({
           {children}
           <ToastContainer />
         </ThemeProvider>
-        <ServiceWorkerRegister />
+        <Script
+          src="/sw.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
 }
 
-function ServiceWorkerRegister() {
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function() {
-    navigator.serviceWorker.register("/sw.js");
-  });
-}
-`,
-      }}
-    />
-  );
-}
+

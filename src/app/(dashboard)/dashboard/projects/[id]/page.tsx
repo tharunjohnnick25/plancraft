@@ -16,10 +16,22 @@ import { Badge } from "@/components/ui/badge";
 export default function ProjectDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const { projects } = useProjectStore();
+  const { projects, fetchProjects, isLoading } = useProjectStore();
   const { addToast } = useUIStore();
+  const [initialized, setInitialized] = React.useState(false);
+
+  React.useEffect(() => { fetchProjects().then(() => setInitialized(true)); }, []);
 
   const project = projects.find((p) => p.id === params.id);
+
+  if (!initialized || isLoading) {
+    return (
+      <div className="max-w-6xl mx-auto text-center py-20">
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-slate-500">Loading project...</p>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
