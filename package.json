@@ -33,6 +33,9 @@
     "uuid": "^14.0.0",
     "zustand": "^5.0.14"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/jsonwebtoken": "^9.0.10",
