@@ -52,7 +52,7 @@ const segments = [
       "Share designs with builders for quotes",
     ],
     cta: "Start Designing",
-    href: "/signup",
+    href: "/generate",
   },
   {
     title: "Real Estate Agents",
@@ -82,7 +82,7 @@ export default function SolutionsPage() {
               <Badge variant="info" className="mb-4">Solutions</Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Tailored Solutions for Every Role</h1>
               <p className="text-lg text-slate-500 dark:text-slate-400">
-                Whether you're an architect, builder, homeowner, or real estate agent — PlanCraftAI has the tools you need.
+                Whether you&apos;re an architect, builder, homeowner, or real estate agent — PlanCraftAI has the tools you need.
               </p>
             </motion.div>
           </div>
@@ -173,7 +173,7 @@ export default function SolutionsPage() {
             <Card className="max-w-2xl mx-auto">
               <CardContent className="py-10">
                 <h2 className="text-2xl font-bold mb-2">Not sure which solution fits?</h2>
-                <p className="text-slate-500 dark:text-slate-400 mb-6">Talk to our team and we'll help you find the perfect plan.</p>
+                <p className="text-slate-500 dark:text-slate-400 mb-6">Talk to our team and we&apos;ll help you find the perfect plan.</p>
                 <div className="flex gap-3 justify-center flex-wrap">
                   <Link href="/enterprise">
                     <Button>Enterprise Solutions</Button>
@@ -181,7 +181,7 @@ export default function SolutionsPage() {
                   <Link href="/contact">
                     <Button variant="secondary">Contact Sales</Button>
                   </Link>
-                  <Link href="/signup">
+                  <Link href="/generate">
                     <Button variant="ghost">Start Free Trial</Button>
                   </Link>
                 </div>

@@ -13,18 +13,18 @@ const approvalStatus: Record<string, "success" | "warning" | "danger" | "default
   rejected: "danger",
 };
 
+const initialListings = mockMarketplace.map((l, i) => ({
+  ...l,
+  approval: i < 3 ? "approved" as const : i < 5 ? "pending" as const : "rejected" as const,
+  featured: i < 1,
+  earnings: Math.floor(Math.random() * 5000) + 500,
+}));
+
 export default function AdminMarketplacePage() {
   const { addToast } = useUIStore();
   const [search, setSearch] = React.useState("");
   const [statusFilter, setStatusFilter] = React.useState("all");
-  const [listings, setListings] = React.useState(
-    mockMarketplace.map((l, i) => ({
-      ...l,
-      approval: i < 3 ? "approved" as const : i < 5 ? "pending" as const : "rejected" as const,
-      featured: i < 1,
-      earnings: Math.floor(Math.random() * 5000) + 500,
-    }))
-  );
+  const [listings, setListings] = React.useState(initialListings);
   const [reviewModal, setReviewModal] = React.useState<string | null>(null);
   const [featureModal, setFeatureModal] = React.useState<string | null>(null);
 

@@ -188,7 +188,7 @@ export default function SustainabilityPage() {
               <div>
                 <p className="font-medium">Annual Harvest Potential</p>
                 <p className="text-2xl font-bold text-blue-600 mt-1">52,000 gal</p>
-                <p className="text-xs text-blue-500 mt-1">Based on 40" annual rainfall and 2,000 sqft roof</p>
+                <p className="text-xs text-blue-500 mt-1">Based on 40&quot; annual rainfall and 2,000 sqft roof</p>
               </div>
               <button
                 onClick={() => { setRainwaterHarvesting(!rainwaterHarvesting); addToast(rainwaterHarvesting ? "System removed" : "System added to plan", "success"); }}

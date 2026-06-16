@@ -178,7 +178,7 @@ export default function FeaturesPage() {
                 <h2 className="text-2xl font-bold mb-2">Ready to try these features?</h2>
                 <p className="text-slate-500 dark:text-slate-400 mb-6">Start designing your dream home today — no credit card required.</p>
                 <div className="flex gap-3 justify-center">
-                  <Link href="/signup">
+                  <Link href="/generate">
                     <Button size="lg">Get Started Free</Button>
                   </Link>
                   <Link href="/pricing">

@@ -14,8 +14,8 @@ const sections = [
     title: "1. Acceptance of Terms",
     content: (
       <>
-        <p>By accessing or using PlanCraftAI ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to all the terms, you may not access or use the Service.</p>
-        <p>These Terms constitute a legally binding agreement between you ("User" or "You") and PlanCraftAI Inc. ("Company", "We", "Us", or "Our"). The Service is provided for your personal or business use subject to these Terms.</p>
+        <p>By accessing or using PlanCraftAI (&quot;the Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to all the terms, you may not access or use the Service.</p>
+        <p>These Terms constitute a legally binding agreement between you (&quot;User&quot; or &quot;You&quot;) and PlanCraftAI Inc. (&quot;Company&quot;, &quot;We&quot;, &quot;Us&quot;, or &quot;Our&quot;). The Service is provided for your personal or business use subject to these Terms.</p>
         <p>We reserve the right to update or modify these Terms at any time. Material changes will be notified via email or through the Service. Continued use after changes constitutes acceptance of the new Terms.</p>
       </>
     ),
@@ -56,7 +56,7 @@ const sections = [
       <>
         <p>Paid plans are billed in advance on a monthly or annual basis depending on your chosen subscription. All payments are non-refundable except as expressly stated in this policy.</p>
         <p>We use Stripe for payment processing. Your payment information is never stored on our servers. By providing payment information, you authorize us to charge the applicable fees.</p>
-        <p>Prices are subject to change with 30 days' notice. Price changes will not affect your current billing cycle. If you do not agree to a price change, you may cancel before it takes effect.</p>
+        <p>Prices are subject to change with 30 days&apos; notice. Price changes will not affect your current billing cycle. If you do not agree to a price change, you may cancel before it takes effect.</p>
         <p>Failed payments may result in account suspension. We will attempt to process the payment three times before suspending access. Your data will be retained for 30 days after suspension.</p>
       </>
     ),
@@ -90,7 +90,7 @@ const sections = [
     title: "7. Limitation of Liability",
     content: (
       <>
-        <p>The Service is provided "as is" without warranty of any kind, either express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+        <p>The Service is provided &quot;as is&quot; without warranty of any kind, either express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
         <p>PlanCraftAI shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, even if advised of the possibility of such damages.</p>
         <p>Our total liability for any claim arising from these Terms or the Service shall not exceed the amount you have paid us in the 12 months preceding the claim.</p>
         <p>Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability. In such jurisdictions, our liability shall be limited to the maximum extent permitted by law.</p>

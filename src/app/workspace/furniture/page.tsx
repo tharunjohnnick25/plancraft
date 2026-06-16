@@ -72,17 +72,19 @@ export default function FurniturePage() {
   const [placedItems, setPlacedItems] = React.useState<PlacedItem[]>([]);
   const [selectedPlaced, setSelectedPlaced] = React.useState<string | null>(null);
   const [styleFilter, setStyleFilter] = React.useState("All");
+  const nextId = React.useRef(0);
 
   const styles = ["All", "Modern", "Classic", "Scandinavian", "Industrial"];
 
   const handlePlaceItem = (item: FurnitureItem) => {
+    const idx = nextId.current++;
     const newItem: PlacedItem = {
-      id: `p${Date.now()}`,
+      id: `p${idx}`,
       furnitureId: item.id,
       name: item.name,
       icon: item.icon,
-      x: 30 + Math.random() * 40,
-      y: 30 + Math.random() * 30,
+      x: 35 + ((idx * 37) % 35),
+      y: 35 + ((idx * 53) % 25),
       rotation: 0,
       scale: 1,
     };
@@ -195,7 +197,7 @@ export default function FurniturePage() {
                 >
                   <span className="text-2xl">{item.icon}</span>
                   <span className="text-[10px] font-medium">{item.name}</span>
-                  <span className="text-[9px] text-slate-400">{item.width}"x{item.height}"</span>
+                  <span className="text-[9px] text-slate-400">{item.width}&quot;x{item.height}&quot;</span>
                 </button>
               ))}
             </div>

@@ -37,10 +37,10 @@ export default function ResetPasswordPage() {
         <h2 className="text-3xl font-bold mb-2">Password reset!</h2>
         <p className="text-slate-500 dark:text-slate-400 mb-8">Your password has been successfully reset.</p>
         <Link
-          href="/login"
+          href="/"
           className="inline-flex items-center justify-center w-full py-2.5 bg-primary hover:bg-primary/90 text-white rounded-xl font-semibold shadow-lg shadow-primary/25 transition-all"
         >
-          Sign in with new password
+          Go to home
         </Link>
       </div>
     );
@@ -49,9 +49,9 @@ export default function ResetPasswordPage() {
   return (
     <>
       <div className="mb-8">
-        <Link href="/login" className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-foreground transition-colors mb-6">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-foreground transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" />
-          Back to log in
+          Back to home
         </Link>
         <h2 className="text-3xl font-bold mb-2">Set new password</h2>
         <p className="text-slate-500 dark:text-slate-400">Must be at least 8 characters.</p>

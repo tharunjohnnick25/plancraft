@@ -30,7 +30,7 @@ const plans = [
       "Custom API Access",
     ],
     cta: "Get Started",
-    href: "/signup",
+    href: "/generate",
   },
   {
     name: "Pro",
@@ -52,7 +52,7 @@ const plans = [
       "Priority Support",
     ],
     cta: "Get Started",
-    href: "/signup",
+    href: "/generate",
   },
   {
     name: "Enterprise",

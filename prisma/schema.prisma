@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -32,6 +32,7 @@ model User {
   conversations   AIConversation[]
   notifications   Notification[]
   settings        Settings?
+  transactions    Transaction[]
 }
 
 model Project {
@@ -159,4 +160,22 @@ model Notification {
   createdAt String @default("")
 
   user User @relation(fields: [userId], references: [id])
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  amount      Float
+  currency    String   @default("INR")
+  status      String   @default("PENDING") // PENDING, SUCCESS, FAILED, REFUNDED
+  orderId     String   @unique
+  txnId       String?  @unique
+  gatewayName String?
+  paymentMode String?
+  respMsg     String?
+  planName    String
+  createdAt   String   @default("")
+  updatedAt   String   @default("")
+
+  user        User     @relation(fields: [userId], references: [id])
 }

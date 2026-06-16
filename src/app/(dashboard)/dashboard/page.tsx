@@ -4,9 +4,9 @@ import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  Wand2, FolderKanban, Sparkles, IndianRupee, ArrowRight, Plus,
+  Wand2, FolderKanban, Sparkles, ArrowRight, Plus,
   Clock, CheckCircle2, Loader2, TrendingUp, Users, Download,
-  ChevronRight, Eye, MoreHorizontal, Star, Zap, Activity
+  ChevronRight, Eye, Star, Zap, Activity
 } from "lucide-react";
 import { useProjectStore } from "@/lib/stores/project-store";
 import { useAuthStore } from "@/lib/stores/auth-store";
@@ -38,7 +38,7 @@ function MiniBarChart({ data, color = "var(--primary)" }: { data: number[]; colo
 }
 
 export default function DashboardPage() {
-  const { projects, generatePlan, duplicateProject, deleteProject } = useProjectStore();
+  const { projects, generatePlan } = useProjectStore();
   const { user } = useAuthStore();
   const { addToast } = useUIStore();
   const [generatingId, setGeneratingId] = React.useState<string | null>(null);
@@ -63,7 +63,7 @@ export default function DashboardPage() {
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl lg:text-3xl font-bold">Good {new Date().getHours() < 12 ? "morning" : new Date().getHours() < 17 ? "afternoon" : "evening"}, {user?.name?.split(" ")[0] || "there"} 👋</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1">Here's what's happening with your projects today.</p>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Here&apos;s what&apos;s happening with your projects today.</p>
         </div>
         <Link href="/generate" className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 hover:scale-105 transition-all text-sm">
           <Wand2 className="w-4 h-4" /> Generate New Plan
@@ -95,7 +95,7 @@ export default function DashboardPage() {
               </Link>
             </div>
             <div className="divide-y divide-slate-100 dark:divide-slate-800">
-              {recentProjects.map((project, i) => {
+              {recentProjects.map((project) => {
                 const sc = statusConfig[project.status];
                 const isGen = generatingId === project.id;
                 return (

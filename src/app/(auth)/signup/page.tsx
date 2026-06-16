@@ -2,114 +2,135 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { Mail, Lock, User, Eye, EyeOff, Loader2, ArrowRight } from "lucide-react";
 import { useAuthStore } from "@/lib/stores/auth-store";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function SignupPage() {
   const { signup, isLoading } = useAuthStore();
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [fieldErrors, setFieldErrors] = React.useState<Record<string, string>>({});
+
+  const validate = () => {
+    const errors: Record<string, string> = {};
+    if (!firstName.trim()) errors.firstName = "First name is required";
+    if (!email.trim()) errors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Invalid email address";
+    if (!password) errors.password = "Password is required";
+    else if (password.length < 6) errors.password = "Password must be at least 6 characters";
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    const form = e.currentTarget as HTMLFormElement;
-    const data = new FormData(form);
-    const firstName = (data.get("firstName") as string) ?? "";
-    const lastName = (data.get("lastName") as string) ?? "";
-    const email = (data.get("email") as string) ?? "";
-    const password = (data.get("password") as string) ?? "";
-    if (!firstName || !lastName || !email || !password) {
-      setError("Please fill in all fields");
-      return;
-    }
-    const success = await signup(`${firstName} ${lastName}`, email, password);
+    if (!validate()) return;
+    const fullName = firstName.trim() + " " + lastName.trim();
+    const success = await signup(fullName, email.trim(), password);
     if (success) {
-      window.location.href = "/dashboard";
+      window.location.href = "/workspace";
+    } else {
+      setError("Signup failed. The email may already be registered.");
     }
   };
 
   return (
     <>
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold mb-2">Create an account</h2>
-        <p className="text-slate-500 dark:text-slate-400">Start generating smart floor plans today.</p>
-      </div>
+      <h1 className="text-2xl font-bold mb-1">Create your account</h1>
+      <p className="text-slate-500 text-sm mb-8">
+        Start designing with AI-powered floor plans.
+      </p>
 
-      <div className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="p-3 rounded-xl bg-danger/10 border border-danger/20 text-sm text-danger">
+          <div className="p-3 text-sm text-danger bg-danger/10 rounded-xl border border-danger/20">
             {error}
           </div>
         )}
 
-        {/* Email Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">First name</label>
-              <input 
-                name="firstName"
-                type="text" 
-                placeholder="John" 
-                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Last name</label>
-              <input 
-                name="lastName"
-                type="text" 
-                placeholder="Doe" 
-                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow"
-                required
-              />
-            </div>
-          </div>
+        <div className="grid grid-cols-2 gap-4">
+          <Input
+            label="First Name"
+            type="text"
+            placeholder="John"
+            icon={<User className="w-4 h-4" />}
+            value={firstName}
+            name="firstName"
+            onChange={(e) => { setFirstName(e.target.value); setFieldErrors((p) => ({ ...p, firstName: "" })); }}
+            error={fieldErrors.firstName}
+            autoComplete="given-name"
+          />
+          <Input
+            label="Last Name"
+            type="text"
+            placeholder="Doe"
+            name="lastName"
+            value={lastName}
+            onChange={(e) => { setLastName(e.target.value); }}
+            autoComplete="family-name"
+          />
+        </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Email address</label>
-            <input 
-              name="email"
-              type="email" 
-              placeholder="name@company.com" 
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow"
-              required
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Password</label>
-            <input 
-              name="password"
-              type="password" 
-              placeholder="Create a password" 
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow"
-              required
-            />
-          </div>
+        <Input
+          label="Email"
+          type="email"
+          placeholder="hello@example.com"
+          icon={<Mail className="w-4 h-4" />}
+          name="email"
+          value={email}
+          onChange={(e) => { setEmail(e.target.value); setFieldErrors((p) => ({ ...p, email: "" })); }}
+          error={fieldErrors.email}
+          autoComplete="email"
+        />
 
-          <button 
-            type="submit" 
-            disabled={isLoading}
-            className="w-full py-2.5 bg-primary hover:bg-primary/90 disabled:opacity-50 text-white rounded-xl font-semibold shadow-lg shadow-primary/25 transition-all mt-4 inline-flex items-center justify-center gap-2"
+        <div className="relative">
+          <Input
+            label="Password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Create a password"
+            icon={<Lock className="w-4 h-4" />}
+            name="password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); setFieldErrors((p) => ({ ...p, password: "" })); }}
+            error={fieldErrors.password}
+            autoComplete="new-password"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-[38px] text-slate-400 hover:text-foreground transition-colors"
+            tabIndex={-1}
           >
-            {isLoading && (
-              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-              </svg>
-            )}
-            Create Account
+            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>
-        </form>
+        </div>
 
-        <p className="text-center text-sm text-slate-500 mt-8">
-          Already have an account?{" "}
-          <Link href="/login" className="font-semibold text-primary hover:underline">
-            Sign in
-          </Link>
-        </p>
-      </div>
+        <Button type="submit" className="w-full" size="lg" isLoading={isLoading}>
+          {!isLoading && "Create Account"}
+          {!isLoading && <ArrowRight className="w-4 h-4" />}
+        </Button>
+      </form>
+
+      <p className="text-sm text-slate-500 text-center mt-8">
+        Already have an account?{" "}
+        <Link href="/login" className="text-primary font-semibold hover:underline">
+          Sign in
+        </Link>
+      </p>
+
+      <p className="text-xs text-slate-400 text-center mt-4 leading-relaxed">
+        By creating an account, you agree to our{" "}
+        <Link href="/terms" className="text-primary hover:underline">Terms of Service</Link>{" "}
+        and{" "}
+        <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>.
+      </p>
     </>
   );
 }

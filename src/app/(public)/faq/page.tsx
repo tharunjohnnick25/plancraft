@@ -71,7 +71,7 @@ export default function FAQPage() {
               <HelpCircle className="w-8 h-8 text-primary mx-auto mb-3" />
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
               <p className="text-lg text-slate-500 dark:text-slate-400">
-                Everything you need to know about PlanCraftAI. Can't find what you're looking for? Reach out to our team.
+                Everything you need to know about PlanCraftAI. Can&apos;t find what you&apos;re looking for? Reach out to our team.
               </p>
             </motion.div>
           </div>
@@ -159,7 +159,7 @@ export default function FAQPage() {
           <div className="mt-8 p-6 glass-card dark:glass-card-dark border border-slate-200 dark:border-slate-800 rounded-2xl text-center">
             <h3 className="font-bold text-lg mb-1">Still have questions?</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-              Can't find the answer you're looking for? Please contact our support team.
+              Can&apos;t find the answer you&apos;re looking for? Please contact our support team.
             </p>
             <div className="flex gap-3 justify-center">
               <Link href="/contact">

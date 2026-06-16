@@ -31,15 +31,6 @@ export default function CostAnalysisPage() {
   const [total, setTotal] = React.useState(currentProject?.costEstimate?.total || 0);
   const [budgetTier, setBudgetTier] = React.useState(currentProject?.budgetTier || "Standard");
 
-  const handleEstimate = async () => {
-    if (currentProject) {
-      const data = await estimateCost(currentProject.id);
-      setCosts(Object.fromEntries(Object.entries(data).filter(([k]) => k !== 'total')));
-      setTotal(data.total);
-      addToast("Cost estimate generated!", "success");
-    }
-  };
-
   const handleSave = () => {
     addToast("Cost estimate saved to project!", "success");
   };
@@ -49,8 +40,24 @@ export default function CostAnalysisPage() {
   };
 
   React.useEffect(() => {
-    if (!costs) handleEstimate();
+    if (!costs && currentProject) {
+      (async () => {
+        const data = await estimateCost(currentProject.id);
+        setCosts(Object.fromEntries(Object.entries(data).filter(([k]) => k !== 'total')));
+        setTotal(data.total);
+        addToast("Cost estimate generated!", "success");
+      })();
+    }
   }, []);
+
+  const handleEstimate = async () => {
+    if (currentProject) {
+      const data = await estimateCost(currentProject.id);
+      setCosts(Object.fromEntries(Object.entries(data).filter(([k]) => k !== 'total')));
+      setTotal(data.total);
+      addToast("Cost estimate generated!", "success");
+    }
+  };
 
   const maxVal = Math.max(...Object.values(costs || {}), 1);
 
@@ -59,12 +66,11 @@ export default function CostAnalysisPage() {
     percentage: total > 0 ? (val / total) * 100 : 0,
   })).sort((a, b) => b.value - a.value) : [];
 
-  let cumulativePercent = 0;
-  const piePaths = pieSegments.map(seg => {
-    const start = cumulativePercent;
-    cumulativePercent += seg.percentage;
-    return { ...seg, startPercent: start, endPercent: cumulativePercent };
-  });
+  const piePaths = pieSegments.reduce<((typeof pieSegments)[number] & { startPercent: number; endPercent: number })[]>((acc, seg) => {
+    const startPercent = acc.length > 0 ? acc[acc.length - 1].endPercent : 0;
+    acc.push({ ...seg, startPercent, endPercent: startPercent + seg.percentage });
+    return acc;
+  }, []);
 
   return (
     <div className="h-screen w-full flex flex-col bg-slate-50 dark:bg-zinc-950 overflow-hidden select-none">

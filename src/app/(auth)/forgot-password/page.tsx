@@ -25,9 +25,9 @@ export default function ForgotPasswordPage() {
         </div>
         <h2 className="text-3xl font-bold mb-2">Check your email</h2>
         <p className="text-slate-500 dark:text-slate-400 mb-6">
-          We've sent a password reset link to <strong className="text-foreground">{email}</strong>
+          We&apos;ve sent a password reset link to <strong className="text-foreground">{email}</strong>
         </p>
-        <p className="text-sm text-slate-400 mb-8">Didn't receive the email? Check your spam folder or try again.</p>
+        <p className="text-sm text-slate-400 mb-8">Didn&apos;t receive the email? Check your spam folder or try again.</p>
         <button
           onClick={() => setSubmitted(false)}
           className="text-sm font-medium text-primary hover:underline"
@@ -35,8 +35,8 @@ export default function ForgotPasswordPage() {
           Use a different email
         </button>
         <div className="mt-4">
-          <Link href="/login" className="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1">
-            <ArrowLeft className="w-4 h-4" /> Back to log in
+          <Link href="/" className="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1">
+            <ArrowLeft className="w-4 h-4" /> Back to home
           </Link>
         </div>
       </div>
@@ -46,12 +46,12 @@ export default function ForgotPasswordPage() {
   return (
     <>
       <div className="mb-8">
-        <Link href="/login" className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-foreground transition-colors mb-6">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-foreground transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" />
-          Back to log in
+          Back to home
         </Link>
         <h2 className="text-3xl font-bold mb-2">Forgot password?</h2>
-        <p className="text-slate-500 dark:text-slate-400">No worries, we'll send you reset instructions.</p>
+        <p className="text-slate-500 dark:text-slate-400">No worries, we&apos;ll send you reset instructions.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">

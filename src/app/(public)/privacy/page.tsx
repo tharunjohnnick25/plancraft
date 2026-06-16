@@ -98,7 +98,7 @@ const sections = [
         <ul className="space-y-1.5">
           <li className="flex items-start gap-2"><span className="mt-2 w-1 h-1 rounded-full bg-primary shrink-0" /><span><strong>Right to Access:</strong> Request a copy of the personal data we hold about you.</span></li>
           <li className="flex items-start gap-2"><span className="mt-2 w-1 h-1 rounded-full bg-primary shrink-0" /><span><strong>Right to Rectification:</strong> Correct inaccurate or incomplete data.</span></li>
-          <li className="flex items-start gap-2"><span className="mt-2 w-1 h-1 rounded-full bg-primary shrink-0" /><span><strong>Right to Erasure:</strong> Request deletion of your personal data ("right to be forgotten").</span></li>
+          <li className="flex items-start gap-2"><span className="mt-2 w-1 h-1 rounded-full bg-primary shrink-0" /><span><strong>Right to Erasure:</strong> Request deletion of your personal data (&quot;right to be forgotten&quot;).</span></li>
           <li className="flex items-start gap-2"><span className="mt-2 w-1 h-1 rounded-full bg-primary shrink-0" /><span><strong>Right to Data Portability:</strong> Receive your data in a structured, commonly used format.</span></li>
           <li className="flex items-start gap-2"><span className="mt-2 w-1 h-1 rounded-full bg-primary shrink-0" /><span><strong>Right to Object:</strong> Object to processing of your data for specific purposes.</span></li>
         </ul>
@@ -166,7 +166,7 @@ export default function PrivacyPage() {
           <Card>
             <CardContent className="p-6 md:p-8 space-y-8">
               <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                This Privacy Policy explains how PlanCraftAI Inc. ("we", "us", or "our") collects, 
+                This Privacy Policy explains how PlanCraftAI Inc. (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, 
                 uses, shares, and protects your personal information when you use our AI-powered 
                 architectural design platform. We are committed to protecting your privacy and 
                 being transparent about our data practices.

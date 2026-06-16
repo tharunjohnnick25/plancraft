@@ -56,8 +56,8 @@ export default function ContactPage() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
               <p className="text-lg text-slate-500 dark:text-slate-400">
-                Have questions about PlanCraftAI? We'd love to hear from you. 
-                Send us a message and we'll respond as soon as possible.
+                Have questions about PlanCraftAI? We&apos;d love to hear from you. 
+                Send us a message and we&apos;ll respond as soon as possible.
               </p>
             </motion.div>
           </div>

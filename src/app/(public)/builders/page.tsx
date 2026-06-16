@@ -217,7 +217,7 @@ export default function BuildersPage() {
               <CardContent className="py-8 text-center">
                 <Star className="w-8 h-8 text-yellow-500 mx-auto mb-3" />
                 <blockquote className="text-lg italic text-slate-600 dark:text-slate-300 mb-4">
-                  "PlanCraftAI has transformed how we estimate and manage projects. We've cut our pre-construction planning time by 60% and reduced material waste by 15%."
+                  &quot;PlanCraftAI has transformed how we estimate and manage projects. We&apos;ve cut our pre-construction planning time by 60% and reduced material waste by 15%.&quot;
                 </blockquote>
                 <div>
                   <p className="font-bold">— Mike Johnson</p>

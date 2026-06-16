@@ -51,7 +51,7 @@ export default function AuthLayout({
             <div className="flex gap-1 mb-3">
               {[1, 2, 3, 4, 5].map(star => <Sparkles key={star} className="w-4 h-4 fill-primary text-primary" />)}
             </div>
-            <p className="italic text-slate-300 mb-4">"PlanCraftAI reduced our initial drafting phase from 2 weeks to literally 5 minutes. The Vastu integration is a game-changer for our clients."</p>
+            <p className="italic text-slate-300 mb-4">&quot;PlanCraftAI reduced our initial drafting phase from 2 weeks to literally 5 minutes. The Vastu integration is a game-changer for our clients.&quot;</p>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-slate-700" />
               <div>

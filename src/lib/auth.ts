@@ -35,14 +35,14 @@ export async function getAuthUser() {
       const { prisma } = await import("./prisma");
       const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
       if (user) {
-        const { password: _, ...userWithoutPassword } = user;
+        const { password: _password, ...userWithoutPassword } = user;
         return userWithoutPassword;
       }
     } catch {}
     const { mockUsers } = await import("./api/mock-db");
     const mockUser = mockUsers.find((u) => u.id === decoded.userId || u.email === decoded.email);
     if (!mockUser) return null;
-    return mockUser as any;
+    return mockUser as Omit<typeof mockUser, 'password'>;
   } catch {
     return null;
   }

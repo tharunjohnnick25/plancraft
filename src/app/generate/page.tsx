@@ -146,7 +146,7 @@ export default function GenerateWizardPage() {
                   <div className="space-y-8">
                     <div>
                       <h2 className="text-3xl font-bold mb-2">Plot Details</h2>
-                      <p className="text-slate-500">Let's start with the physical dimensions of your land.</p>
+                      <p className="text-slate-500">Let&apos;s start with the physical dimensions of your land.</p>
                     </div>
                     <div className="grid sm:grid-cols-2 gap-6">
                       <div className="space-y-2">

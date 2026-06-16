@@ -7,7 +7,7 @@ import {
   Hexagon, LayoutDashboard, FolderKanban, Wand2, Sparkles, IndianRupee, Download,
   Settings, Search, Bell, Menu, X, ChevronDown, ChevronRight, Users, Library,
   History, LayoutTemplate, CreditCard, BarChart3, Star, Share2, LogOut,
-  Sun, Moon, Palette, Building2, Zap
+  Sun, Moon, Palette, Building2, Zap, Upload, Scan, Image,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNotificationStore } from "@/lib/stores/notification-store";
@@ -65,6 +65,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         { name: "Generate Plan", href: "/generate", icon: Wand2, highlight: true },
         { name: "AI Assistant", href: "/dashboard/ai", icon: Sparkles },
         { name: "AI History", href: "/dashboard/history", icon: History },
+        { name: "Image Upload", href: "/dashboard/upload", icon: Upload },
+        { name: "AI Processing", href: "/dashboard/process", icon: Scan },
+        { name: "2D & 3D Rendering", href: "/dashboard/rendering", icon: Image },
         { name: "Templates", href: "/dashboard/templates", icon: LayoutTemplate },
         { name: "Floor Plan Library", href: "/dashboard/library", icon: Library },
       ],
@@ -169,7 +172,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <span className="text-xs text-slate-400 truncate">{user?.email ?? ""}</span>
               </div>
             </div>
-            <button onClick={() => { logout(); router.push("/login"); }} className="p-1 opacity-0 group-hover:opacity-100 hover:text-danger transition-all" title="Logout">
+            <button onClick={() => { logout(); router.push("/"); }} className="p-1 opacity-0 group-hover:opacity-100 hover:text-danger transition-all" title="Logout">
               <LogOut className="w-4 h-4 text-slate-400" />
             </button>
           </div>

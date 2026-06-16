@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "danger" | "outline";
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "icon";
   isLoading?: boolean;
 }
 
@@ -17,7 +17,7 @@ export function Button({ className, variant = "primary", size = "md", isLoading,
     danger: "bg-danger text-white hover:bg-danger/90",
     outline: "border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-foreground",
   };
-  const sizes = { sm: "px-3 py-1.5 text-sm gap-1.5", md: "px-5 py-2.5 text-sm gap-2", lg: "px-8 py-3 text-base gap-2" };
+  const sizes = { sm: "px-3 py-1.5 text-sm gap-1.5", md: "px-5 py-2.5 text-sm gap-2", lg: "px-8 py-3 text-base gap-2", icon: "p-2" };
   return (
     <button className={cn(base, variants[variant], sizes[size], className)} disabled={disabled || isLoading} {...props}>
       {isLoading && (

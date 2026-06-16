@@ -156,16 +156,13 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: "Modern Luxury Villa", dim: "40x60 ft", rooms: "5 Beds", floors: "2 Floors" },
-              { name: "Compact Urban Duplex", dim: "30x40 ft", rooms: "3 Beds", floors: "2 Floors" },
-              { name: "Scandinavian Apartment", dim: "1200 sqft", rooms: "2 Beds", floors: "1 Floor" },
+              { name: "Modern Luxury Villa", dim: "40x60 ft", rooms: "5 Beds", floors: "2 Floors", image: "/images/showcase/modern_luxury_villa.png" },
+              { name: "Compact Urban Duplex", dim: "30x40 ft", rooms: "3 Beds", floors: "2 Floors", image: "/images/showcase/compact_urban_duplex.png" },
+              { name: "Scandinavian Apartment", dim: "1200 sqft", rooms: "2 Beds", floors: "1 Floor", image: "/images/showcase/scandinavian_apartment.png" },
             ].map((project, i) => (
               <div key={i} className="group rounded-2xl overflow-hidden glass-card dark:glass-card-dark border border-slate-200 dark:border-slate-800">
                 <div className="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
-                  {/* Placeholder for project thumbnail */}
-                  <div className="absolute inset-0 flex items-center justify-center text-slate-400">
-                    <Home className="w-12 h-12 opacity-20" />
-                  </div>
+                  <img src={project.image} alt={project.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                     <button className="w-full py-3 bg-white text-slate-900 rounded-lg font-semibold hover:bg-slate-100 transition-colors">
                       View Blueprint

@@ -24,7 +24,7 @@ export default function VerifyEmailPage() {
 
       <h2 className="text-3xl font-bold mb-2">Verify your email</h2>
       <p className="text-slate-500 dark:text-slate-400 mb-2">
-        We've sent a verification link to your email address.
+        We&apos;ve sent a verification link to your email address.
       </p>
       <p className="text-sm text-slate-400 mb-8">
         Please check your inbox and click the verification link to activate your account.
@@ -62,8 +62,8 @@ export default function VerifyEmailPage() {
       )}
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
-        <Link href="/login" className="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1">
-          Back to login
+        <Link href="/" className="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1">
+          Back to home
         </Link>
         <Link href="/dashboard" className="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1">
           Go to dashboard <ArrowRight className="w-4 h-4" />

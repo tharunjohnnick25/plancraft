@@ -1,5 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { apiClient, setTokens, clearTokens } from "../api-client";
+
+function setAuthCookie(value: string) {
+  if (typeof document !== "undefined") {
+    document.cookie = `plancraft_auth=${value}; path=/; max-age=${value === "true" ? 604800 : 0}; SameSite=Lax`;
+  }
+}
 
 export interface User {
   id: string; name: string; email: string;
@@ -31,7 +38,7 @@ export const useAuthStore = create<AuthState>()(
       login: async (email: string, password: string) => {
         set({ isLoading: true });
         try {
-          const res = await fetch("/api/auth/login", {
+          const res = await apiClient("/api/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
@@ -41,6 +48,8 @@ export const useAuthStore = create<AuthState>()(
             set({ isLoading: false });
             return false;
           }
+          setTokens(data.access_token, data.refresh_token);
+          setAuthCookie("true");
           set({ user: data.user, isAuthenticated: true, isLoading: false });
           return true;
         } catch {
@@ -51,7 +60,7 @@ export const useAuthStore = create<AuthState>()(
       signup: async (name: string, email: string, password: string) => {
         set({ isLoading: true });
         try {
-          const res = await fetch("/api/auth/signup", {
+          const res = await apiClient("/api/auth/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password }),
@@ -61,6 +70,8 @@ export const useAuthStore = create<AuthState>()(
             set({ isLoading: false });
             return false;
           }
+          setTokens(data.access_token, data.refresh_token);
+          setAuthCookie("true");
           set({ user: data.user, isAuthenticated: true, isLoading: false });
           return true;
         } catch {
@@ -69,7 +80,11 @@ export const useAuthStore = create<AuthState>()(
         }
       },
       logout: async () => {
-        await fetch("/api/auth/logout", { method: "POST" });
+        try {
+          await apiClient("/api/auth/logout", { method: "POST" });
+        } catch {}
+        clearTokens();
+        setAuthCookie("false");
         set({ user: null, isAuthenticated: false });
       },
       updateProfile: async (data) => {
@@ -79,7 +94,7 @@ export const useAuthStore = create<AuthState>()(
       },
       resetPassword: async (email: string) => {
         try {
-          const res = await fetch("/api/auth/reset-password", {
+          const res = await apiClient("/api/auth/reset-password", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, newPassword: "Temp123" }),
@@ -92,7 +107,7 @@ export const useAuthStore = create<AuthState>()(
       checkAuth: async () => {
         if (get().isAuthenticated) return;
         try {
-          const res = await fetch("/api/auth/me");
+          const res = await apiClient("/api/auth/me");
           const data = await res.json();
           if (res.ok && data.user) {
             set({ user: data.user, isAuthenticated: true });

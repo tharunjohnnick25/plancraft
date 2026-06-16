@@ -12,6 +12,7 @@ import { useUIStore } from "@/lib/stores/ui-store";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import GalleryViewer from "@/components/viewers/GalleryViewer";
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -38,7 +39,7 @@ export default function ProjectDetailPage() {
       <div className="max-w-6xl mx-auto text-center py-20">
         <Home className="w-16 h-16 text-slate-300 mx-auto mb-4" />
         <h2 className="text-2xl font-bold mb-2">Project not found</h2>
-        <p className="text-slate-500 mb-6">The project you're looking for doesn't exist or has been deleted.</p>
+        <p className="text-slate-500 mb-6">The project you&apos;re looking for doesn&apos;t exist or has been deleted.</p>
         <Link href="/dashboard/projects">
           <Button>
             <ArrowLeft className="w-4 h-4" />
@@ -91,6 +92,14 @@ export default function ProjectDetailPage() {
 
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
+          <Card>
+            <CardHeader>
+              <h2 className="text-lg font-bold">Project Gallery & Media Assets</h2>
+            </CardHeader>
+            <CardContent>
+              <GalleryViewer projectId={project.id} />
+            </CardContent>
+          </Card>
           <Card>
             <CardHeader>
               <h2 className="text-lg font-bold">Project Details</h2>

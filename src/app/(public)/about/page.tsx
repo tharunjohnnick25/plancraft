@@ -103,11 +103,11 @@ export default function AboutPage() {
                 <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
                   <li className="flex items-start gap-2">
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                    <span><strong>Innovation First</strong> — We push the boundaries of what's possible with AI in architecture.</span>
+                    <span><strong>Innovation First</strong> — We push the boundaries of what&apos;s possible with AI in architecture.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                    <span><strong>User Obsessed</strong> — Every decision starts with what's best for our users.</span>
+                    <span><strong>User Obsessed</strong> — Every decision starts with what&apos;s best for our users.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
@@ -182,7 +182,7 @@ export default function AboutPage() {
               <Quote className="w-8 h-8 text-primary mx-auto mb-3" />
               <h2 className="text-2xl font-bold mb-2">Want to be part of our story?</h2>
               <p className="text-slate-500 dark:text-slate-400 mb-6 max-w-xl mx-auto">
-                We're always looking for talented people who share our vision. 
+                We&apos;re always looking for talented people who share our vision. 
                 Check out our open positions or reach out to us.
               </p>
               <div className="flex gap-3 justify-center">

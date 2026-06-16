@@ -142,7 +142,7 @@ export default function WorkspacePage() {
               <div className="h-px w-full bg-blue-500 relative">
                 <div className="absolute -top-2 left-0 w-px h-4 bg-blue-500" />
                 <div className="absolute -top-2 right-0 w-px h-4 bg-blue-500" />
-                <span className="absolute -top-6 bg-[#e2e8f0] dark:bg-[#09090b] px-2 text-xs font-bold text-blue-500">30' 0"</span>
+                <span className="absolute -top-6 bg-[#e2e8f0] dark:bg-[#09090b] px-2 text-xs font-bold text-blue-500">30&apos; 0&quot;</span>
               </div>
             </div>
           </div>
@@ -221,19 +221,19 @@ export default function WorkspacePage() {
                     <Sparkles className="w-4 h-4" />
                   </div>
                   <div className="bg-white dark:bg-zinc-800 p-3 rounded-2xl rounded-tl-sm text-sm shadow-sm border border-slate-100 dark:border-slate-700">
-                    Hi! I'm your AI Architect Copilot. I can help you modify this layout, optimize the space, or analyze costs. What would you like to do?
+                    Hi! I&apos;m your AI Architect Copilot. I can help you modify this layout, optimize the space, or analyze costs. What would you like to do?
                   </div>
                 </div>
                 
                 <div className="pl-11 space-y-2">
                   <button className="block w-full text-left px-3 py-2 text-xs font-medium text-primary bg-white dark:bg-zinc-800 rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors shadow-sm">
-                    "Increase living room size by 20%"
+                    &quot;Increase living room size by 20%&quot;
                   </button>
                   <button className="block w-full text-left px-3 py-2 text-xs font-medium text-primary bg-white dark:bg-zinc-800 rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors shadow-sm">
-                    "Add an attached bathroom to the master"
+                    &quot;Add an attached bathroom to the master&quot;
                   </button>
                   <button className="block w-full text-left px-3 py-2 text-xs font-medium text-primary bg-white dark:bg-zinc-800 rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors shadow-sm">
-                    "Check Vastu compliance"
+                    &quot;Check Vastu compliance&quot;
                   </button>
                 </div>
               </div>
@@ -262,7 +262,7 @@ export default function WorkspacePage() {
         <div className="flex gap-4">
           <span>X: 104.5</span>
           <span>Y: -42.0</span>
-          <span>Grid: 1' 0"</span>
+          <span>Grid: 1&apos; 0&quot;</span>
         </div>
         <div className="flex gap-4">
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-success"></span> Syncing</span>

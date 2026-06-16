@@ -105,10 +105,9 @@ export function ThemeProvider({
   const resolvedTheme =
     theme === "system" ? systemTheme : (theme as "light" | "dark");
 
-  const attrs = Array.isArray(attribute) ? attribute : [attribute];
-
   const applyTheme = React.useCallback(
     (t: string) => {
+      const attrs = Array.isArray(attribute) ? attribute : [attribute];
       const resolved = t === "system" ? getSystemTheme() : t;
       for (const attr of attrs) {
         if (attr === "class") {
@@ -126,7 +125,7 @@ export function ThemeProvider({
         document.documentElement.style.colorScheme = resolved;
       }
     },
-    [attrs, themes, value, enableColorScheme]
+    [attribute, themes, value, enableColorScheme]
   );
 
   const setTheme = React.useCallback(

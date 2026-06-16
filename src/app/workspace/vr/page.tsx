@@ -3,9 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import {
-  ArrowLeft, Hexagon, Eye, Navigation, Move3d, Crosshair,
+  ArrowLeft, Hexagon, Eye, Navigation, Move3d,
   Ruler, Layers, Activity, Wifi, Zap, Monitor,
-  ChevronUp, ChevronDown, Maximize2
+  Maximize2
 } from "lucide-react";
 
 interface TeleportZone {
@@ -16,6 +16,7 @@ export default function WorkspaceVRPage() {
   const [currentFloor, setCurrentFloor] = React.useState(0);
   const [activeTeleport, setActiveTeleport] = React.useState<string | null>(null);
   const [fps, setFps] = React.useState(72);
+  const [latency, setLatency] = React.useState(25);
   const [showStats, setShowStats] = React.useState(true);
 
   const floors = ["Ground Floor", "First Floor"];
@@ -31,6 +32,7 @@ export default function WorkspaceVRPage() {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setFps(prev => Math.max(60, Math.min(90, prev + (Math.random() > 0.5 ? 1 : -1))));
+      setLatency(Math.round(20 + Math.random() * 10));
     }, 2000);
     return () => clearInterval(interval);
   }, []);
@@ -166,7 +168,7 @@ export default function WorkspaceVRPage() {
               <Activity className="w-3 h-3" /> FPS: {fps}
             </div>
             <div className="flex items-center gap-2 text-blue-400">
-              <Zap className="w-3 h-3" /> Latency: {Math.round(20 + Math.random() * 10)}ms
+              <Zap className="w-3 h-3" /> Latency: {latency}ms
             </div>
             <div className="flex items-center gap-2 text-zinc-400">
               Draw: 2.4M tris

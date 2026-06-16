@@ -8,10 +8,11 @@ import {
   Wand2, CheckCircle2, Clock, Loader2, Star, Share2, Download,
   Filter, SortAsc, Building2, ArrowRight, Calendar, Users
 } from "lucide-react";
-import { useProjectStore } from "@/lib/stores/project-store";
+import { useProjectStore, type Project } from "@/lib/stores/project-store";
 import { useUIStore } from "@/lib/stores/ui-store";
 import { ConfirmModal } from "@/components/ui/confirm-modal";
 import { cn } from "@/lib/utils";
+import AssetViewer from "@/components/viewers/AssetViewer";
 
 const statusConfig = {
   completed: { label: "Completed", class: "badge-success", icon: CheckCircle2 },
@@ -40,6 +41,7 @@ export default function ProjectsPage() {
   const [openMenu, setOpenMenu] = React.useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = React.useState<string | null>(null);
   const [generatingId, setGeneratingId] = React.useState<string | null>(null);
+  const [previewProject, setPreviewProject] = React.useState<Project | null>(null);
 
   const filtered = React.useMemo(() => {
     let list = [...projects];
@@ -156,11 +158,14 @@ export default function ProjectsPage() {
                     <div className="text-white/20 font-black text-8xl">{project.name.charAt(0)}</div>
                   </div>
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100">
-                    <Link href={`/dashboard/projects/${project.id}`} className="px-3 py-1.5 bg-white text-slate-900 rounded-lg font-semibold text-xs hover:bg-slate-100 transition-colors">
-                      View Details
-                    </Link>
-                    <Link href="/workspace/2d" className="px-3 py-1.5 bg-white/20 text-white rounded-lg font-semibold text-xs hover:bg-white/30 transition-colors backdrop-blur-sm">
-                      Open Editor
+                    <button
+                      onClick={(e) => { e.preventDefault(); setPreviewProject(project); }}
+                      className="px-2.5 py-1.5 bg-white text-slate-900 rounded-lg font-semibold text-xs hover:bg-slate-100 transition-colors cursor-pointer"
+                    >
+                      Quick Preview
+                    </button>
+                    <Link href={`/dashboard/projects/${project.id}`} className="px-2.5 py-1.5 bg-white/20 text-white rounded-lg font-semibold text-xs hover:bg-white/30 transition-colors backdrop-blur-sm">
+                      Details
                     </Link>
                   </div>
                   <div className="absolute top-3 left-3">
@@ -263,13 +268,20 @@ export default function ProjectsPage() {
                 <span className="text-sm text-slate-500">{project.style}</span>
                 <span className="text-xs text-slate-400">{new Date(project.updatedAt).toLocaleDateString()}</span>
                 <div className="flex items-center gap-1">
-                  <Link href={`/dashboard/projects/${project.id}`} className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-colors">
+                  <button
+                    onClick={() => setPreviewProject(project)}
+                    className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-colors cursor-pointer"
+                    title="Quick Preview"
+                  >
                     <Eye className="w-4 h-4" />
+                  </button>
+                  <Link href={`/dashboard/projects/${project.id}`} className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-colors" title="View Details">
+                    <Building2 className="w-4 h-4" />
                   </Link>
-                  <button onClick={() => handleDuplicate(project.id)} className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-colors">
+                  <button onClick={() => handleDuplicate(project.id)} className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-colors" title="Duplicate">
                     <Copy className="w-4 h-4" />
                   </button>
-                  <button onClick={() => setDeleteTarget(project.id)} className="p-1.5 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-lg text-slate-400 hover:text-danger transition-colors">
+                  <button onClick={() => setDeleteTarget(project.id)} className="p-1.5 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-lg text-slate-400 hover:text-danger transition-colors" title="Delete">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
@@ -292,6 +304,14 @@ export default function ProjectsPage() {
 
       {/* Click outside to close menu */}
       {openMenu && <div className="fixed inset-0 z-10" onClick={() => setOpenMenu(null)} />}
+
+      {/* Dynamic Asset Viewer Modal for Projects */}
+      {previewProject && (
+        <AssetViewer
+          assets={previewProject.assets || []}
+          onClose={() => setPreviewProject(null)}
+        />
+      )}
     </div>
   );
 }

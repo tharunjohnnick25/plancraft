@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+backend/venv/
+
+selenium-tests/node_modules/
+
+# logs
+*.log
+
+# test artifacts
+test_db.py
+test_db_pass.py

@@ -125,10 +125,10 @@ export default function CareersPage() {
           {/* Hero */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <Badge variant="info" className="mb-4">We're Hiring!</Badge>
+              <Badge variant="info" className="mb-4">We&apos;re Hiring!</Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Join the Team Building the Future of Architecture</h1>
               <p className="text-lg text-slate-500 dark:text-slate-400">
-                At PlanCraftAI, we're combining AI and architecture to democratize home design. 
+                At PlanCraftAI, we&apos;re combining AI and architecture to democratize home design. 
                 Come shape the future with us.
               </p>
             </motion.div>

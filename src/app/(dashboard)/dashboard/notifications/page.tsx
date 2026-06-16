@@ -3,7 +3,7 @@
 import * as React from "react";
 import {
   Bell, Check, Info, AlertTriangle, X, CheckCheck,
-  Mail, MailOpen, Clock
+  MailOpen, Clock
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUIStore } from "@/lib/stores/ui-store";
@@ -44,7 +44,7 @@ export default function NotificationsPage() {
         <div className="text-center py-16">
           <Bell className="w-12 h-12 text-slate-300 mx-auto mb-4" />
           <h3 className="text-lg font-semibold mb-1">No notifications</h3>
-          <p className="text-slate-500 text-sm">You're all caught up!</p>
+          <p className="text-slate-500 text-sm">You&apos;re all caught up!</p>
         </div>
       ) : (
         <div className="space-y-3">

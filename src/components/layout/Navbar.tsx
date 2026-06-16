@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X, Hexagon, Sparkles } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
+import { useAuthStore } from "@/lib/stores/auth-store";
+import { setTokens } from "@/lib/api-client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -23,7 +25,37 @@ const navLinks = [
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const { theme, setTheme } = useTheme();
+  const { user, login, isAuthenticated } = useAuthStore();
+
+  React.useEffect(() => setMounted(true), []);
+
+  const handleLogin = async () => {
+    if (isAuthenticated) return;
+    const success = await login("guest@plancraftai.com", "Guest123!");
+    if (!success) {
+      setTokens("mock_access_" + Date.now(), "mock_refresh_" + Date.now());
+      useAuthStore.setState({
+        user: {
+          id: "u_anon_" + Date.now(),
+          name: "Guest User",
+          email: "guest@plancraftai.com",
+          role: "user",
+          plan: "free",
+          createdAt: new Date().toISOString(),
+          verified: false,
+          aiCreditsUsed: 0,
+          aiCreditsTotal: 20,
+          storageUsedMb: 0,
+          storageQuotaMb: 100,
+          projectsCount: 0,
+        },
+        isAuthenticated: true,
+        isLoading: false,
+      });
+    }
+  };
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -68,23 +100,27 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-4 border-l border-slate-200 dark:border-slate-800 pl-6">
+            {!isAuthenticated && (
+              <button
+                onClick={handleLogin}
+                className="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors"
+              >
+                Login
+              </button>
+            )}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors"
+              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors w-9 h-9 flex items-center justify-center"
               aria-label="Toggle Theme"
+              title="Toggle theme"
             >
-              {theme === "dark" ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-              )}
+              {mounted && theme === "dark" ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                )
+              }
             </button>
-            <Link
-              href="/login"
-              className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-foreground transition-colors"
-            >
-              Login
-            </Link>
             <Link
               href="/generate"
               className="px-5 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
@@ -122,14 +158,14 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <div className="h-px bg-slate-200 dark:bg-slate-800 my-2" />
-            <Link
-              href="/login"
-              className="text-base font-medium text-slate-600 dark:text-slate-300 hover:text-primary p-2"
-              onClick={() => setIsOpen(false)}
-            >
-              Login
-            </Link>
+            {!isAuthenticated && (
+              <button
+                onClick={() => { handleLogin(); setIsOpen(false); }}
+                className="text-center px-5 py-3 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-semibold rounded-lg"
+              >
+                Login
+              </button>
+            )}
             <Link
               href="/generate"
               className="text-center px-5 py-3 bg-primary text-white font-semibold rounded-lg shadow-md"

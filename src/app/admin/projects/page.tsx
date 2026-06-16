@@ -98,8 +98,8 @@ export default function AdminProjectsPage() {
                     </div>
                   </td>
                   <td className="p-4 text-zinc-400 font-mono text-xs">{project.userId}</td>
-                  <td className="p-4"><Badge variant={statusVariants[project.status] as any}>{project.status}</Badge></td>
-                  <td className="p-4"><Badge variant={planVariants[project.budgetTier] as any}>{project.budgetTier}</Badge></td>
+                  <td className="p-4"><Badge variant={(statusVariants[project.status] ?? "default") as "success" | "warning" | "info" | "default"}>{project.status}</Badge></td>
+                  <td className="p-4"><Badge variant={(planVariants[project.budgetTier] ?? "default") as "info" | "success" | "default"}>{project.budgetTier}</Badge></td>
                   <td className="p-4 text-zinc-400">{project.createdAt}</td>
                   <td className="p-4 text-zinc-400">{project.rooms?.length || 0} rooms</td>
                   <td className="p-4">

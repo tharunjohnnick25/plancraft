@@ -7,8 +7,8 @@ import {
   MousePointer2, Move, Square, Expand, DoorOpen, Focus,
   Undo, Redo, ZoomIn, ZoomOut, Save, Download, FileText, Edit3, Eye,
   ChevronRight, ArrowLeft, Hexagon, Sparkles, Play, Grid3x3,
-  Maximize2, Minimize2, Sun, Moon, Ruler, Crosshair, Circle,
-  Trash2, Copy, Scissors, Type, Eraser
+  Maximize2, Sun, Moon, Ruler, Crosshair, Circle,
+  Type
 } from "lucide-react";
 import { useProjectStore } from "@/lib/stores/project-store";
 import { useUIStore } from "@/lib/stores/ui-store";
@@ -43,11 +43,11 @@ const ROOM_ICONS: Record<string, string> = {
   default: "📐",
 };
 
-function WorkspaceInner() {
+function Workspace2DContent() {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("project");
 
-  const { currentProject, projects, setCurrentProject, updateProject } = useProjectStore();
+  const { currentProject, setCurrentProject, updateProject } = useProjectStore();
   const { addToast } = useUIStore();
 
   React.useEffect(() => {
@@ -103,7 +103,7 @@ function WorkspaceInner() {
   const getRoomBorderColor = (type?: string) => ROOM_BORDER_COLORS[type || "default"] || ROOM_BORDER_COLORS.default;
   const getRoomIcon = (type?: string) => ROOM_ICONS[type || "default"] || ROOM_ICONS.default;
 
-  const handleExport = (format: "pdf" | "png" | "svg") => {
+  const handleExport = React.useCallback((format: "pdf" | "png" | "svg") => {
     if (!canvasRef.current || !currentProject) return;
     addToast(`Exporting "${currentProject.name}" as ${format.toUpperCase()}...`, "success");
 
@@ -176,7 +176,7 @@ function WorkspaceInner() {
         win.document.close();
       }
     }
-  };
+  }, [currentProject, rooms, canvasRef, addToast, canvasWidth, canvasHeight, SCALE, getRoomTypeColor, getRoomBorderColor]);
 
   const handleSave = () => {
     if (currentProject) {
@@ -447,7 +447,7 @@ function WorkspaceInner() {
                     <span className={`text-center ${nightMode ? 'text-zinc-600' : 'text-slate-500'}`}
                       style={{ fontSize: `${Math.min(11, Math.max(8, w / 16))}px` }}
                     >
-                      {room.width}'x{room.length}'
+                      {room.width}&apos;x{room.length}&apos;
                     </span>
                     {/* Window indicators */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-1.5 bg-blue-300 border-x-2 border-b-2" style={{ borderColor: borderColor }} />
@@ -466,7 +466,7 @@ function WorkspaceInner() {
                       <div className="absolute -top-1.5 right-0 w-px h-3" style={{ backgroundColor: nightMode ? '#6366f1' : '#3b82f6' }} />
                       <span className={`absolute -top-6 left-1/2 -translate-x-1/2 px-2 text-[10px] font-bold ${
                         nightMode ? 'text-indigo-400 bg-zinc-900' : 'text-blue-500 bg-[#e2e8f0]'
-                      }`}>{currentProject?.plotWidth || 0}' 0"</span>
+                      }`}>{currentProject?.plotWidth || 0}&apos; 0&quot;</span>
                     </div>
                   </div>
                   <div className="absolute -left-10 top-0 h-full flex items-center">
@@ -475,7 +475,7 @@ function WorkspaceInner() {
                       <div className="absolute -left-1.5 bottom-0 h-px w-3" style={{ backgroundColor: nightMode ? '#6366f1' : '#3b82f6' }} />
                       <span className={`absolute -left-16 top-1/2 -translate-y-1/2 px-2 text-[10px] font-bold -rotate-90 whitespace-nowrap ${
                         nightMode ? 'text-indigo-400 bg-zinc-900' : 'text-blue-500 bg-[#e2e8f0]'
-                      }`}>{currentProject?.plotLength || 0}' 0"</span>
+                      }`}>{currentProject?.plotLength || 0}&apos; 0&quot;</span>
                     </div>
                   </div>
                 </>
@@ -587,7 +587,7 @@ function WorkspaceInner() {
                     >
                       <span>{getRoomIcon(room.type)}</span>
                       <span className="flex-1 text-left font-medium">{room.name}</span>
-                      <span className="text-xs text-slate-400">{room.width}'x{room.length}'</span>
+                      <span className="text-xs text-slate-400">{room.width}&apos;x{room.length}&apos;</span>
                     </button>
                   ))}
                 </div>
@@ -622,7 +622,7 @@ function WorkspaceInner() {
                       onClick={() => handleAISuggest(s)}
                       className="block w-full text-left px-3 py-2 text-xs font-medium text-primary rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors shadow-sm"
                     >
-                      "{s}"
+                      &quot;{s}&quot;
                     </button>
                   ))}
                 </div>
@@ -661,7 +661,7 @@ function WorkspaceInner() {
         <div className="flex gap-4">
           <span>X: {cursorPos.x}</span>
           <span>Y: {cursorPos.y}</span>
-          <span>Grid: {gridSize}"</span>
+          <span>Grid: {gridSize}&quot;</span>
           <span>Tool: {activeTool}</span>
           <span>Rooms: {rooms.length}</span>
         </div>
@@ -687,7 +687,7 @@ export default function Workspace2DPage() {
         </div>
       </div>
     }>
-      <WorkspaceInner />
+      <Workspace2DContent />
     </React.Suspense>
   );
 }

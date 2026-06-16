@@ -4,6 +4,8 @@ import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ToastContainer } from "@/components/ui";
+import { AuthInitializer } from "@/components/layout/AuthInitializer";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -75,6 +77,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <AuthInitializer />
           {children}
           <ToastContainer />
         </ThemeProvider>
